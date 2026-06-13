@@ -25,7 +25,7 @@
     <div class="relative z-10 w-full flex flex-col items-center px-6 mt-12 md:mt-0">
         
         <div class="text-center mb-10">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white tracking-tight">Masuk ke ASIA<span class="text-orange-500">PLAY</span></h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white tracking-tight">Masuk ke NONTON<span class="text-orange-500">AJA</span></h1>
             <p class="text-gray-400 text-sm md:text-base leading-relaxed">
                 Masuk untuk melanjutkan dan nikmati<br>ribuan film & serial favoritmu.
             </p>

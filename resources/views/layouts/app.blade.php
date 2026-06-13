@@ -27,7 +27,7 @@
         <div class="flex items-center space-x-6">
             <div class="relative bg-black/50 rounded-full px-4 py-1.5 border border-gray-700 hidden md:block">
                 <input type="text" placeholder="Search for movies, series..." class="bg-transparent border-none text-sm text-white focus:outline-none w-48">
-                <span class="text-gray-400 absolute right-3 top-2 text-sm">🔍</span>
+                <span class="text-gray-400 absolute right-3 top-2 text-sm"></span>
             </div>
             
             <div class="relative">
@@ -37,9 +37,8 @@
                         <span class="text-sm font-medium hidden md:block">{{ Auth::user()->username }} ▾</span>
                     </button>
                     
-                    <div id="dropdownMenu" class="hidden absolute right-0 mt-3 w-48 bg-[#181a20] rounded-md shadow-lg border border-gray-800 overflow-hidden z-50">
-                        <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">Profile</a>
-                        <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">Watchlist</a>
+                    <div id=    "dropdownMenu" class="hidden absolute right-0 mt-3 w-48 bg-[#181a20] rounded-md shadow-lg border border-gray-800 overflow-hidden z-50">
+                        <a href="{{ route('profile.index') }}" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">Profile</a>                        <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">Watchlist</a>
                         <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">History</a>
                         
                         <div class="border-t border-gray-700 my-1"></div>
@@ -59,6 +58,7 @@
             </div>
             </div>
     </nav>
+    
 
     <main>
         @yield('content')
