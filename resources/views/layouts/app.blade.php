@@ -7,7 +7,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link rel="stylesheet" href="{{ asset('css/app_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app_style.css') }}?v={{ time() }}">
 </head>
 <body class="bg-[#0f1115] text-white font-sans antialiased">
 
@@ -27,22 +27,37 @@
         <div class="flex items-center space-x-6">
             <div class="relative bg-black/50 rounded-full px-4 py-1.5 border border-gray-700 hidden md:block">
                 <input type="text" placeholder="Search for movies, series..." class="bg-transparent border-none text-sm text-white focus:outline-none w-48">
-                <span class="text-gray-400 absolute right-3 top-2 text-sm"></span>
+                <span class="text-gray-400 absolute right-3 top-2 text-sm">🔍</span>
             </div>
             
             <div class="relative">
-                <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
-                    <img src="https://ui-avatars.com/api/?name=User&background=random" alt="Profile" class="w-8 h-8 rounded-full border border-gray-600">
-                    <span class="text-sm font-medium hidden md:block">Sign in ▾</span>
-                </button>
-                
-                <div id="dropdownMenu" class="hidden absolute right-0 mt-3 w-48 bg-[#181a20] rounded-md shadow-lg border border-gray-800 overflow-hidden z-50">
-                    <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">Profile</a>
-                    <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">Watchlist</a>
-                    <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">History</a>
-                </div>
+                @auth
+                    <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
+                        <img src="{{ Auth::user()->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->username) . '&background=random' }}" alt="Profile" class="w-8 h-8 rounded-full border border-gray-600 object-cover">
+                        <span class="text-sm font-medium hidden md:block">{{ Auth::user()->username }} ▾</span>
+                    </button>
+                    
+                    <div id="dropdownMenu" class="hidden absolute right-0 mt-3 w-48 bg-[#181a20] rounded-md shadow-lg border border-gray-800 overflow-hidden z-50">
+                        <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">Profile</a>
+                        <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">Watchlist</a>
+                        <a href="#" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition">History</a>
+                        
+                        <div class="border-t border-gray-700 my-1"></div>
+                        
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full text-left block px-4 py-3 text-sm text-red-500 hover:bg-gray-800 hover:text-red-400 transition">
+                                Log Out
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-full text-sm font-medium transition duration-300">
+                        Sign in
+                    </a>
+                @endauth
             </div>
-        </div>
+            </div>
     </nav>
 
     <main>
@@ -94,6 +109,6 @@
         </div>
     </footer>
 
-    <script src="{{ asset('script/app_script.js') }}"></script>
+    <script src="{{ asset('script/app_script.js') }}?v={{ time() }}"></script>
 </body>
 </html>
