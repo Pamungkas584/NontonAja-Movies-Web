@@ -17,7 +17,7 @@
                     <span class="font-medium text-sm">Akun Saya</span>
                 </a>
 
-                <a href="#" class="flex items-center px-8 py-4 border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/20 transition">
+                <a href="{{ route('profile.vip') }}" class="flex items-center px-8 py-4 border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/20 transition">
                     <svg class="w-5 h-5 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
                     </svg>
@@ -138,3 +138,4 @@
     </div>
 </div>
 @endsection
+

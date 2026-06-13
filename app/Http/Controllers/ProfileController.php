@@ -30,4 +30,10 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Nama berhasil diperbarui!');
     }
+
+    // VIP Buy option
+    public function vip()
+    {
+        return view('profile.vip');
+    }
 }
