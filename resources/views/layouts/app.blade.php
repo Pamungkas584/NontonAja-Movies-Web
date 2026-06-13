@@ -16,11 +16,27 @@
             <div class="text-2xl font-bold tracking-tighter text-white">
                 NONTON<span class="text-orange-500">AJA</span>
             </div>
-            <ul class="hidden md:flex space-x-6 text-sm font-medium text-gray-300">
-                <li class="text-white border-b-2 border-orange-500 pb-1 cursor-pointer">Beranda</li>
-                <li class="hover:text-white cursor-pointer transition">Film</li>
-                <li class="hover:text-white cursor-pointer transition">Serial</li>
-                <li class="hover:text-white cursor-pointer transition">Genre</li>
+            <ul class="hidden md:flex space-x-6 text-sm font-medium">
+                <li>
+                    <a href="{{ url('/') }}" class="cursor-pointer transition {{ request()->is('/') ? 'text-white border-b-2 border-orange-500 pb-1' : 'text-gray-300 hover:text-white' }}">
+                        Beranda
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="cursor-pointer transition {{ request()->is('film') ? 'text-white border-b-2 border-orange-500 pb-1' : 'text-gray-300 hover:text-white' }}">
+                        Film
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="cursor-pointer transition {{ request()->is('serial') ? 'text-white border-b-2 border-orange-500 pb-1' : 'text-gray-300 hover:text-white' }}">
+                        Serial
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="cursor-pointer transition {{ request()->is('genre') ? 'text-white border-b-2 border-orange-500 pb-1' : 'text-gray-300 hover:text-white' }}">
+                        Genre
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -34,7 +50,7 @@
                 @auth
                     <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
                         <img src="{{ Auth::user()->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->username) . '&background=random' }}" alt="Profile" class="w-8 h-8 rounded-full border border-gray-600 object-cover">
-                        <span class="text-sm font-medium hidden md:block">{{ Auth::user()->username }} ▾</span>
+                        <span class="text-sm font-medium hidden md:block">{{ Auth::user()->name }} ▾</span>
                     </button>
                     
                     <div id=    "dropdownMenu" class="hidden absolute right-0 mt-3 w-48 bg-[#181a20] rounded-md shadow-lg border border-gray-800 overflow-hidden z-50">
