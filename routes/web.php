@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -20,3 +21,5 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/name', [ProfileController::class, 'updateName'])->name('profile.update');
     Route::get('/profile/vip', [ProfileController::class, 'vip'])->name('profile.vip');
 });
+
+Route::get('/movie/{id}', [MovieController::class, 'show'])->name('movies.show');

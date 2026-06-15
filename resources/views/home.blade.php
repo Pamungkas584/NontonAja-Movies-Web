@@ -12,7 +12,7 @@
                 <h1 class="text-5xl md:text-6xl font-bold mb-4">{{ $hero->title }}</h1>
                 <div class="flex items-center space-x-4 text-sm mb-6 text-gray-300 font-semibold">
                     <span class="bg-yellow-500 text-black px-1.5 rounded font-bold">IMDb</span>
-                    <span>{{ $hero->rating }}</span>
+                    <span>{{ number_format($hero->rating, 1) }}</span>
                     <span class="border border-gray-500 px-1.5 rounded text-xs">HD</span>
                     <span>{{ $hero->year }}</span>
                     <span>{{ $hero->age_rating }}</span>
@@ -21,9 +21,10 @@
                     {{ $hero->description }}
                 </p>
                 <div class="flex space-x-4">
-                    <button class="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2.5 px-8 rounded flex items-center space-x-2 transition">
-                        <span></span> <span>Tonton Sekarang</span>
-                    </button>
+                    <a href="{{ route('movies.show', $hero->id) }}" class="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2.5 px-8 rounded flex items-center space-x-2 transition inline-flex w-max">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Tonton Sekarang</span>
+                    </a>
                     <button class="bg-transparent border border-gray-500 hover:bg-gray-800 hover:border-gray-400 text-white font-medium py-2.5 px-8 rounded transition">
                         + Daftar Saya
                     </button>
@@ -47,12 +48,14 @@
             </div>
             <div class="drag-scroll flex space-x-4 overflow-x-auto hide-scrollbar pb-4 snap-x cursor-grab">
                 @forelse($dramaMovies as $movie)
-                <div class="min-w-[250px] w-[250px] md:min-w-[280px] md:w-[280px] flex-none snap-start group relative rounded-lg overflow-hidden cursor-pointer select-none">
+                <a href="{{ route('movies.show', $movie->id) }}" class="min-w-[250px] w-[250px] md:min-w-[280px] md:w-[280px] flex-none snap-start group relative block rounded-lg overflow-hidden cursor-pointer select-none">
                     <img src="{{ $movie->thumbnail_url ?? 'https://via.placeholder.com/300x169' }}" draggable="false" alt="{{ $movie->title }}" class="w-full aspect-video object-cover transition transform group-hover:scale-105 duration-500">
                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center pointer-events-none">
-                        <span class="text-white text-2xl border-2 border-white rounded-full w-12 h-12 flex items-center justify-center pl-1 backdrop-blur-sm"></span> <!-- need icon -->
+                        <span class="text-white text-2xl border-2 border-white rounded-full w-12 h-12 flex items-center justify-center pl-1 backdrop-blur-sm">
+                            <svg class="w-5 h-5 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </span>
                     </div>
-                </div>
+                </a>
                 @empty
                 <p class="text-gray-500 text-sm">Belum ada data drama di database.</p>
                 @endforelse
@@ -66,12 +69,14 @@
             </div>
             <div class="drag-scroll flex space-x-4 overflow-x-auto hide-scrollbar pb-4 snap-x cursor-grab relative">
                 @forelse($actionMovies as $movie)
-                <div class="min-w-[250px] w-[250px] md:min-w-[280px] md:w-[280px] flex-none snap-start group relative rounded-lg overflow-hidden cursor-pointer select-none">
+                <a href="{{ route('movies.show', $movie->id) }}" class="min-w-[250px] w-[250px] md:min-w-[280px] md:w-[280px] flex-none snap-start group relative block rounded-lg overflow-hidden cursor-pointer select-none">
                     <img src="{{ $movie->thumbnail_url ?? 'https://via.placeholder.com/300x169' }}" draggable="false" alt="{{ $movie->title }}" class="w-full aspect-video object-cover transition transform group-hover:scale-105 duration-500">
                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center pointer-events-none">
-                        <span class="text-white text-2xl border-2 border-white rounded-full w-12 h-12 flex items-center justify-center pl-1 backdrop-blur-sm"></span> <!-- need icon -->
+                        <span class="text-white text-2xl border-2 border-white rounded-full w-12 h-12 flex items-center justify-center pl-1 backdrop-blur-sm">
+                            <svg class="w-5 h-5 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </span>
                     </div>
-                </div>
+                </a>
                 @empty
                 <p class="text-gray-500 text-sm">Belum ada data action di database.</p>
                 @endforelse
