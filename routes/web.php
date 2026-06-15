@@ -10,10 +10,15 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
-// Route khusus untuk Google Socialite
-Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('google.login');
-Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Route khusus untuk autentikasi dan sesi pengguna
+Route::middleware('web')->group(function () {
+    // Rute Login Google Socialite
+    Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('google.login');
+    Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+    
+    // Rute Logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 // Rute Profil (Hanya bisa diakses jika sudah login)
 Route::middleware('auth')->group(function () {

@@ -56,7 +56,7 @@ class AuthController extends Controller
 
         } catch (\Exception $e) {
             // Jika user batal login atau terjadi error
-            dd($e->getMessage());
+            dd($e);
             // return redirect('/login')->with('error', 'Gagal login menggunakan Google. Silakan coba lagi.');
         }
     }
