@@ -39,4 +39,10 @@ class User extends Authenticatable
     {
         return $this->vip_until && $this->vip_until->isFuture();
     }
+
+    //relasi user ke review
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
