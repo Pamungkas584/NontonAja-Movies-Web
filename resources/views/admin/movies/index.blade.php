@@ -29,7 +29,7 @@
             </div>
         </div>
         
-        <div class="p-4 border-t border-gray-800 shrink-0">
+        <div id="paginationContainer" class="p-4 border-t border-gray-800">
             <a href="{{ url('/') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition">
                 <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                 <span class="font-medium text-sm">Kembali ke Web</span>
@@ -97,9 +97,11 @@
 
             <div class="bg-[#16181f] border border-gray-800 rounded-t-xl p-6 flex flex-col lg:flex-row gap-4 items-center justify-between">
                 <div class="relative w-full lg:w-96">
-                    <input type="text" placeholder="Cari film berdasarkan judul..." class="w-full bg-[#0f1115] border border-gray-700 text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-gray-500 text-white">
-                    <svg class="w-5 h-5 absolute right-3 top-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                </div>
+                <input type="text" id="searchInputAdmin" 
+                    value="{{ request('search') }}" 
+                    data-url="{{ route('admin.movies.index') }}" 
+                    placeholder="Cari film berdasarkan judul..." 
+                    class="w-full bg-[#0f1115] border border-gray-700 text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-gray-500 text-white">                </div>
                 
                 <div class="flex space-x-4 w-full lg:w-auto">
                     <button class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition whitespace-nowrap flex items-center">
@@ -122,7 +124,7 @@
                             <th class="p-4 text-center">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="text-sm divide-y divide-gray-800/50">
+                    <tbody id="tableBody" class="text-sm divide-y divide-gray-800/50">
                         
                         @forelse($movies as $movie)
                         <tr class="hover:bg-gray-800/20 transition">
@@ -187,8 +189,7 @@
         </div>
     </main>
 
+<script src="{{ asset('script/admin_ajax.js') }}?v={{ time() }}"></script>
+input
 </body>
 </html>
-
-
-semua genre
