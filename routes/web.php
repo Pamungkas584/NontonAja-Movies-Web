@@ -40,3 +40,9 @@ Route::get('/film/kategori/{category}', [MovieController::class, 'category'])->n
 
 Route::get('/movie/{id}', [MovieController::class, 'show'])->name('movies.show');
 
+// searching 
+Route::get('/search/local', [App\Http\Controllers\MovieController::class, 'searchLocal'])->name('search.local');
+Route::get('/search', [App\Http\Controllers\MovieController::class, 'searchTmdb'])->name('search.tmdb');
+
+// import hasil searching yang tidak ada di database lokal
+Route::get('/movie/import/{tmdb_id}', [App\Http\Controllers\MovieController::class, 'importFromTmdb'])->name('movies.import');
