@@ -43,29 +43,25 @@ class AdminController extends Controller
             'stream_url' => 'nullable|url',
         ]);
 
-        // Beri nilai default untuk rating dan banner (bisa dikembangkan nanti)
+        // KUNCI PERBAIKAN: Ambil nilai stream_url lalu hapus dari array $validated
+        $streamUrl = $validated['stream_url'] ?? null;
+        unset($validated['stream_url']); 
+
         $validated['rating'] = 0; 
         $validated['banner_url'] = $validated['thumbnail_url'];
 
-        // Simpan ke tabel movies
+        // Sekarang aman, tabel movies tidak akan kemasukan kolom stream_url
         $movie = Movie::create($validated);
 
-        // Jika ada link pemutaran, simpan ke tabel streams
-        if ($request->filled('stream_url')) {
-            Stream::create([
+        // Jika ada link pemutaran, simpan ke tabel streams yang terpisah
+        if (!empty($streamUrl)) {
+            \App\Models\Stream::create([
                 'movie_id' => $movie->id,
-                'stream_url' => $request->stream_url
+                'stream_url' => $streamUrl
             ]);
         }
 
         return redirect()->route('admin.movies.index')->with('success', 'Film berhasil ditambahkan!');
-    }
-
-    // Menampilkan form edit
-    public function edit($id)
-    {
-        $movie = Movie::with('stream')->findOrFail($id);
-        return view('admin.movies.form', compact('movie'));
     }
 
     // Memperbarui data film
@@ -83,17 +79,21 @@ class AdminController extends Controller
             'stream_url' => 'nullable|url',
         ]);
 
-        // Update tabel movies
+        // KUNCI PERBAIKAN: Ambil nilai stream_url lalu hapus dari array $validated
+        $streamUrl = $validated['stream_url'] ?? null;
+        unset($validated['stream_url']); 
+
+        // Update tabel movies (hanya memperbarui kolom bawaan film saja)
         $movie->update($validated);
 
-        // Update atau Create tabel streams
-        if ($request->filled('stream_url')) {
-            Stream::updateOrCreate(
+        // Update atau Create data ke tabel streams yang terpisah
+        if (!empty($streamUrl)) {
+            \App\Models\Stream::updateOrCreate(
                 ['movie_id' => $movie->id],
-                ['stream_url' => $request->stream_url]
+                ['stream_url' => $streamUrl]
             );
         } else {
-            // Jika dikosongkan, hapus stream yang ada
+            // Jika kolom di-kosongkan saat edit, hapus data stream lamanya
             if ($movie->stream) {
                 $movie->stream->delete();
             }
