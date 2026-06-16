@@ -29,6 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 });
+
 Route::get('/film', [MovieController::class, 'index'])->name('movies.index');
+
+// Rute untuk halaman spesifik kategori (Baru)
+Route::get('/film/kategori/{category}', [MovieController::class, 'category'])->name('movies.category');
+
 Route::get('/movie/{id}', [MovieController::class, 'show'])->name('movies.show');
 

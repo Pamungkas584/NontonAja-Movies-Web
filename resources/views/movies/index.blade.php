@@ -24,7 +24,7 @@
 
     <div class="flex space-x-3 overflow-x-auto hide-scrollbar pb-4 mb-8">
         @foreach($categories as $cat)
-            <a href="?category={{ $cat }}" class="px-5 py-2 rounded-full whitespace-nowrap text-sm font-medium transition duration-300 {{ $activeCategory == $cat ? 'bg-orange-600 text-white' : 'bg-transparent border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500' }}">
+            <a href="{{ route('movies.category', strtolower($cat)) }}" class="px-5 py-2 rounded-full whitespace-nowrap text-sm font-medium transition duration-300 {{ $activeCategory == $cat ? 'bg-orange-600 text-white' : 'bg-transparent border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500' }}">
                 {{ $cat }}
             </a>
         @endforeach

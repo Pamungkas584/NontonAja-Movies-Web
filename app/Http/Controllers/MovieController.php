@@ -49,5 +49,41 @@ class MovieController extends Controller
 
         return view('movies.index', compact('popularMovies', 'latestMovies', 'allMovies', 'activeCategory', 'categories'));
     }
-    
+
+    // Menampilkan halaman spesifik berdasarkan Kategori/Genre
+    public function category($categoryName)
+    {
+        // Query dasar pencarian film
+        $query = Movie::query();
+
+        // Siapkan deskripsi dinamis agar tampilan lebih hidup
+        $descriptions = [
+            'action' => 'Temukan film-film penuh aksi dan adrenalin yang menegangkan dari berbagai negara. Kejar-kejaran, pertarungan epik, dan misi berbahaya menantimu.',
+            'drama' => 'Selami kisah-kisah penuh emosi dan intrik yang menyentuh hati. Jelajahi berbagai sisi kehidupan manusia melalui film drama terbaik.',
+            'comedy' => 'Lepaskan penat dengan tawa! Nikmati pilihan film komedi paling lucu yang siap menghibur hari-harimu.',
+            'romance' => 'Rasakan kehangatan cinta melalui kisah romantis yang manis, mengharukan, dan tak terlupakan.',
+            'horror' => 'Uji keberanianmu dengan koleksi film horor paling menyeramkan yang akan membuatmu merinding.',
+            'thriller' => 'Penuh misteri dan ketegangan. Pecahkan teka-teki dan rasakan sensasi berdebar di setiap adegannya.'
+        ];
+
+        // Format nama kategori agar rapi (misal: "action" menjadi "Action")
+        $categoryName = ucfirst(strtolower($categoryName));
+        $description = $descriptions[strtolower($categoryName)] ?? "Jelajahi kumpulan film {$categoryName} terbaik, terpopuler, dan terbaru pilihan kami.";
+
+        // Jika bukan kategori 'Semua', saring data berdasarkan genre
+        if (strtolower($categoryName) !== 'semua') {
+            $query->where('category', 'like', "%{$categoryName}%");
+        }
+
+        $totalMovies = $query->count();
+        
+        // Ambil film populer khusus untuk kategori ini (Rating Tertinggi)
+        $popularMovies = (clone $query)->orderBy('rating', 'desc')->take(10)->get();
+        
+        // Ambil semua film untuk grid bawah (Dengan Pagination)
+        $allMovies = (clone $query)->orderBy('title', 'asc')->paginate(18);
+
+        return view('movies.category', compact('categoryName', 'description', 'totalMovies', 'popularMovies', 'allMovies'));
+    }
+
 }
