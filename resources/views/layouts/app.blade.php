@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="cursor-pointer transition {{ request()->is('film') ? 'text-white border-b-2 border-orange-500 pb-1' : 'text-gray-300 hover:text-white' }}">
+                    <a href="{{ route('movies.index') }}" class="cursor-pointer transition {{ request()->is('film') ? 'text-white border-b-2 border-orange-500 pb-1' : 'text-gray-300 hover:text-white' }}">
                         Film
                     </a>
                 </li>

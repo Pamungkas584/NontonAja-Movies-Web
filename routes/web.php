@@ -29,6 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 });
-
+Route::get('/film', [MovieController::class, 'index'])->name('movies.index');
 Route::get('/movie/{id}', [MovieController::class, 'show'])->name('movies.show');
 
