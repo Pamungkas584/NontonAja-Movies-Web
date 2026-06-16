@@ -36,4 +36,73 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 400); 
         });
     }
+
+    // LOGIKA MODAL OVERLAY HAPUS FILM
+    let formToSubmit = null;
+    const deleteModal = document.getElementById('deleteModal');
+    const deleteModalMovieTitle = document.getElementById('deleteModalMovieTitle');
+    const btnCancelDelete = document.getElementById('btnCancelDelete');
+    const btnConfirmDelete = document.getElementById('btnConfirmDelete');
+
+    // Menggunakan Event Delegation (e.target.closest) agar tombol hapus 
+    // tetap berfungsi normal walaupun tabel dirender ulang oleh AJAX pencarian
+    document.addEventListener('click', function(e) {
+        const trigger = e.target.closest('.btn-delete-trigger');
+        
+        if (trigger) {
+            e.preventDefault();
+            const formId = trigger.getAttribute('data-form-id');
+            const movieTitle = trigger.getAttribute('data-title');
+            
+            formToSubmit = document.getElementById(formId);
+            
+            if (formToSubmit && deleteModal) {
+                // Masukkan teks judul film ke dalam modal
+                deleteModalMovieTitle.textContent = movieTitle;
+                
+                // Tampilkan overlay modal dengan animasi transisi yang halus
+                deleteModal.classList.remove('hidden');
+                setTimeout(() => {
+                    deleteModal.classList.remove('opacity-0');
+                    deleteModal.querySelector('.scale-95').classList.replace('scale-95', 'scale-100');
+                }, 10);
+            }
+        }
+    });
+
+    // Fungsi menutup modal
+    function closeDeleteModal() {
+        if (deleteModal) {
+            deleteModal.classList.add('opacity-0');
+            deleteModal.querySelector('.scale-100').classList.replace('scale-100', 'scale-95');
+            setTimeout(() => {
+                deleteModal.classList.add('hidden');
+                formToSubmit = null;
+            }, 300); // Sinkron dengan durasi transition duration-300 Tailwind
+        }
+    }
+
+    // Aksi tombol Batal
+    if (btnCancelDelete) {
+        btnCancelDelete.addEventListener('click', closeDeleteModal);
+    }
+
+    // Aksi tombol Ya, Hapus (Submit Form)
+    if (btnConfirmDelete) {
+        btnConfirmDelete.addEventListener('click', function() {
+            if (formToSubmit) {
+                formToSubmit.submit();
+            }
+        });
+    }
+
+    // Menutup modal jika admin tidak sengaja klik area gelap di luar kotak modal
+    if (deleteModal) {
+        deleteModal.addEventListener('click', function(e) {
+            if (e.target === deleteModal) {
+                closeDeleteModal();
+            }
+        });
+    }
+
 });

@@ -54,19 +54,18 @@ class AdminController extends Controller
             'stream_url' => 'nullable|url',
         ]);
 
-        // KUNCI PERBAIKAN: Ambil nilai stream_url lalu hapus dari array $validated
         $streamUrl = $validated['stream_url'] ?? null;
         unset($validated['stream_url']); 
 
         $validated['rating'] = 0; 
         $validated['banner_url'] = $validated['thumbnail_url'];
 
-        // Sekarang aman, tabel movies tidak akan kemasukan kolom stream_url
+        // tabel movies tidak akan kemasukan kolom stream_url
         $movie = Movie::create($validated);
 
         // Jika ada link pemutaran, simpan ke tabel streams yang terpisah
         if (!empty($streamUrl)) {
-            \App\Models\Stream::create([
+            Stream::create([
                 'movie_id' => $movie->id,
                 'stream_url' => $streamUrl
             ]);
@@ -74,6 +73,25 @@ class AdminController extends Controller
 
         return redirect()->route('admin.movies.index')->with('success', 'Film berhasil ditambahkan!');
     }
+    // Menampilkan form edit
+    public function edit($id)
+    {
+        $movie = Movie::with('stream')->findOrFail($id);
+        return view('admin.movies.form', compact('movie'));
+    }
+
+    // Menghapus data film
+    public function destroy($id)
+    {
+        $movie = Movie::findOrFail($id);
+        
+        // Menghapus film (Jika database-mu sudah disetting cascade, data di tabel streams otomatis ikut terhapus)
+        $movie->delete();
+
+        return redirect()->route('admin.movies.index')->with('success', 'Film berhasil dihapus dari database!');
+    }
+
+
 
     // Memperbarui data film
     public function update(Request $request, $id)
@@ -99,7 +117,7 @@ class AdminController extends Controller
 
         // Update atau Create data ke tabel streams yang terpisah
         if (!empty($streamUrl)) {
-            \App\Models\Stream::updateOrCreate(
+            Stream::updateOrCreate(
                 ['movie_id' => $movie->id],
                 ['stream_url' => $streamUrl]
             );

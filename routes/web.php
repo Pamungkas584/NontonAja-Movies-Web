@@ -64,4 +64,7 @@ Route::prefix('admin')->middleware(['web', 'auth', 'role:admin'])->group(functio
     
     // Memproses pembaruan data film di database
     Route::put('/movies/{id}', [AdminController::class, 'update'])->name('admin.movies.update');
+
+    // hapus film
+    Route::delete('/movies/{id}', [AdminController::class, 'destroy'])->name('admin.movies.destroy');
 });
