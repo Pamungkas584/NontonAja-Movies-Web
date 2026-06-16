@@ -8,18 +8,29 @@ use App\Models\Stream;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Menghitung Total Semua Film
         $totalMovies = Movie::count();
 
-        // Menghitung Film Aktif (Hanya film yang memiliki relasi stream dan URL-nya tidak kosong)
+        // Menghitung Film Aktif
         $activeMovies = Movie::whereHas('stream', function ($query) {
             $query->whereNotNull('stream_url')->where('stream_url', '!=', '');
         })->count();
 
-        // Mengambil data film untuk tabel, diurutkan dari yang terbaru (pagination 10 per halaman)
-        $movies = Movie::with('stream')->orderBy('created_at', 'desc')->paginate(10);
+        // Siapkan kerangka pencarian
+        $query = Movie::with('stream')->orderBy('created_at', 'desc');
+
+        // Jika ada input dari kotak pencarian AJAX
+        if ($request->has('search') && $request->search != '') {
+            $query->where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('year', 'like', '%' . $request->search . '%')
+                ->orWhere('category', 'like', '%' . $request->search . '%'); 
+                  // Bonus: Admin juga bisa mencari berdasarkan tahun atau genre!
+        }
+
+        // Ambil data (10 per halaman) dan sertakan parameter pencarian agar paginasi tidak rusak
+        $movies = $query->paginate(10)->appends(['search' => $request->search]);
 
         return view('admin.movies.index', compact('totalMovies', 'activeMovies', 'movies'));
     }

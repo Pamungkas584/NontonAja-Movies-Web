@@ -102,14 +102,8 @@
                 </div>
                 
                 <div class="flex space-x-4 w-full lg:w-auto">
-                    <select class="bg-[#0f1115] border border-gray-700 text-sm rounded-lg px-4 py-2.5 focus:outline-none text-white w-full lg:w-auto appearance-none">
-                        <option>Semua Genre</option>
-                    </select>
-                    <select class="bg-[#0f1115] border border-gray-700 text-sm rounded-lg px-4 py-2.5 focus:outline-none text-white w-full lg:w-auto appearance-none">
-                        <option>Semua Status</option>
-                    </select>
                     <button class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition whitespace-nowrap flex items-center">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Reset
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Refresh
                     </button>
                 </div>
             </div>
@@ -197,3 +191,4 @@
 </html>
 
 
+semua genre
