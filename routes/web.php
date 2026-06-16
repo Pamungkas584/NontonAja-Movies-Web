@@ -8,6 +8,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\WatchlistController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -46,3 +47,21 @@ Route::get('/search', [App\Http\Controllers\MovieController::class, 'searchTmdb'
 
 // import hasil searching yang tidak ada di database lokal
 Route::get('/movie/import/{tmdb_id}', [App\Http\Controllers\MovieController::class, 'importFromTmdb'])->name('movies.import');
+
+// Rute khusus Admin (Hanya bisa diakses oleh user yang memiliki role 'admin')
+Route::prefix('admin')->middleware(['web', 'auth', 'role:admin'])->group(function () {
+    // Menampilkan daftar film
+    Route::get('/movies', [AdminController::class, 'index'])->name('admin.movies.index');
+    
+    // Menampilkan halaman form tambah film
+    Route::get('/movies/create', [AdminController::class, 'create'])->name('admin.movies.create');
+    
+    // Memproses penyimpanan data film baru ke database
+    Route::post('/movies', [AdminController::class, 'store'])->name('admin.movies.store');
+    
+    // Menampilkan halaman form edit film (membawa data film lama)
+    Route::get('/movies/{id}/edit', [AdminController::class, 'edit'])->name('admin.movies.edit');
+    
+    // Memproses pembaruan data film di database
+    Route::put('/movies/{id}', [AdminController::class, 'update'])->name('admin.movies.update');
+});
