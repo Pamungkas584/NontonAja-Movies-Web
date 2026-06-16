@@ -28,11 +28,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="cursor-pointer transition {{ request()->is('serial') ? 'text-white border-b-2 border-orange-500 pb-1' : 'text-gray-300 hover:text-white' }}">
-                        Serial
-                    </a>
-                </li>
-                <li>
                     <a href="#" class="cursor-pointer transition {{ request()->is('genre') ? 'text-white border-b-2 border-orange-500 pb-1' : 'text-gray-300 hover:text-white' }}">
                         Watchlist Saya
                     </a>
