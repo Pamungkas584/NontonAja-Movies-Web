@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/vip', [ProfileController::class, 'vip'])->name('profile.vip');
     Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
     Route::post('/watchlist/toggle/{movie}', [WatchlistController::class, 'toggle'])->name('watchlist.toggle');
+    Route::get('/daftar-saya', [WatchlistController::class, 'index'])->name('watchlist.index');
 });
 
 Route::get('/film', [MovieController::class, 'index'])->name('movies.index');

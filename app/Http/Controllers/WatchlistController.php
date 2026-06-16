@@ -25,4 +25,16 @@ class WatchlistController extends Controller
         // Kembalikan user ke halaman sebelumnya dengan pesan sukses yang dinamis
         return redirect()->back()->with('success', 'Daftar tontonan Anda berhasil diperbarui');
     }
+
+    // Menampilkan semua film yang ada di watchlist user
+    public function index()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        // Mengambil daftar film yang ditambahkan oleh user dengan sistem pagination (misal 18 film per halaman)
+        $watchlistMovies = $user->watchlists()->orderBy('watchlists.created_at', 'desc')->paginate(18);
+
+        return view('movies.watchlist', compact('watchlistMovies'));
+    }
 }
