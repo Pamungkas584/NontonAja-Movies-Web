@@ -20,14 +20,37 @@
                 <p class="text-gray-300 mb-8 leading-relaxed line-clamp-3">
                     {{ $hero->description }}
                 </p>
-                <div class="flex space-x-4">
+                    <div class="flex space-x-4">
                     <a href="{{ route('movies.show', $hero->id) }}" class="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2.5 px-8 rounded flex items-center space-x-2 transition inline-flex w-max">
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <span>Tonton Sekarang</span>
                     </a>
-                    <button class="bg-transparent border border-gray-500 hover:bg-gray-800 hover:border-gray-400 text-white font-medium py-2.5 px-8 rounded transition">
-                        + Daftar Saya
-                    </button>
+                    
+                    @auth
+                        <form action="{{ route('watchlist.toggle', $hero->id) }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="bg-transparent border border-gray-500 hover:bg-gray-800 hover:border-gray-400 text-white font-medium py-2.5 px-8 rounded transition flex items-center">
+                                @if(Auth::user()->watchlists->contains($hero->id))
+                                    <svg class="w-5 h-5 mr-2 text-orange-500 fill-current" viewBox="0 0 20 20">
+                                        <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
+                                    </svg>
+                                    <span class="text-white">in Watchlist</span>
+                                @else
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                    <span>Daftar Saya</span>
+                                @endif
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="bg-transparent border border-gray-500 hover:bg-gray-800 hover:border-gray-400 text-white font-medium py-2.5 px-8 rounded transition flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            <span>Daftar Saya</span>
+                        </a>
+                    @endauth
                 </div>
             </div>
         </div>

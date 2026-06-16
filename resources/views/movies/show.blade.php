@@ -35,10 +35,33 @@
                 <svg class="w-5 h-5 mr-2 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 Tonton Sekarang
             </button>
-            <button class="bg-transparent border border-gray-500 hover:border-white hover:text-white text-gray-300 px-6 py-3.5 rounded-lg font-semibold flex items-center transition duration-300">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-                Daftar Saya
-            </button>
+
+            @auth
+                <form action="{{ route('watchlist.toggle', $movie->id) }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="bg-transparent border border-gray-500 hover:border-white hover:text-white text-gray-300 px-6 py-3.5 rounded-lg font-semibold flex items-center transition duration-300">
+                        @if(Auth::user()->watchlists->contains($movie->id))
+                            <svg class="w-5 h-5 mr-2 text-orange-500 fill-current" viewBox="0 0 20 20">
+                                <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
+                            </svg>
+                            <span class="text-white">in Watchlist</span>
+                        @else
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            <span>Daftar Saya</span>
+                        @endif
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="bg-transparent border border-gray-500 hover:border-white hover:text-white text-gray-300 px-6 py-3.5 rounded-lg font-semibold flex items-center transition duration-300">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    <span>Daftar Saya</span>
+                </a>
+            @endauth
+
             <button class="bg-gray-800/80 hover:bg-gray-700 text-white p-3.5 rounded-full border border-gray-600 transition duration-300">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
             </button>

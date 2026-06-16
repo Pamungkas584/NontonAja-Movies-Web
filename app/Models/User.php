@@ -47,4 +47,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
+
+    // Relasi untuk Daftar Saya (Watchlist)
+    public function watchlists()
+    {
+        // Parameter kedua adalah nama tabel pivot-nya
+        return $this->belongsToMany(Movie::class, 'watchlists');
+    }
 }
