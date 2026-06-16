@@ -22,7 +22,7 @@ Route::middleware('web')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-// Rute Profil (Hanya bisa diakses jika sudah login)
+// Rute khusus sudah login (Hanya bisa diakses jika sudah login)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile/name', [ProfileController::class, 'updateName'])->name('profile.update');
@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
     Route::post('/watchlist/toggle/{movie}', [WatchlistController::class, 'toggle'])->name('watchlist.toggle');
     Route::get('/daftar-saya', [WatchlistController::class, 'index'])->name('watchlist.index');
+    Route::get('/nonton/{id}', [App\Http\Controllers\MovieController::class, 'watch'])->name('movies.watch');
 });
 
 Route::get('/film', [MovieController::class, 'index'])->name('movies.index');

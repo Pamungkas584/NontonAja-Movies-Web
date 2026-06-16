@@ -31,11 +31,10 @@
         </p>
 
         <div class="flex items-center space-x-4">
-            <button class="bg-[#ff6b00] hover:bg-[#e56000] text-white px-8 py-3.5 rounded-lg font-semibold flex items-center transition duration-300 shadow-[0_4px_14px_0_rgba(255,107,0,0.39)]">
+            <a href="{{ route('movies.watch', $movie->id) }}" class="bg-[#ff6b00] hover:bg-[#e56000] text-white px-8 py-3.5 rounded-lg font-semibold flex items-center transition duration-300 shadow-[0_4px_14px_0_rgba(255,107,0,0.39)] w-max">
                 <svg class="w-5 h-5 mr-2 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 Tonton Sekarang
-            </button>
-
+            </a>
             @auth
                 <form action="{{ route('watchlist.toggle', $movie->id) }}" method="POST" class="inline">
                     @csrf

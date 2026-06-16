@@ -86,4 +86,12 @@ class MovieController extends Controller
         return view('movies.category', compact('categoryName', 'description', 'totalMovies', 'popularMovies', 'allMovies'));
     }
 
+    // Menampilkan halaman khusus pemutaran film
+    public function watch($id)
+    {
+        // Tarik data film sekaligus data stream-nya jika ada
+        $movie = Movie::with('stream')->findOrFail($id);
+
+        return view('movies.watch', compact('movie'));
+    }
 }

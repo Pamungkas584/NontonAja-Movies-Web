@@ -16,4 +16,10 @@ class Movie extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    // Satu film punya satu link streaming
+    public function stream()
+    {
+        return $this->hasOne(Stream::class);
+    }
 }
