@@ -26,7 +26,6 @@ class AdminController extends Controller
             $query->where('title', 'like', '%' . $request->search . '%')
                 ->orWhere('year', 'like', '%' . $request->search . '%')
                 ->orWhere('category', 'like', '%' . $request->search . '%'); 
-                  // Bonus: Admin juga bisa mencari berdasarkan tahun atau genre!
         }
 
         // Ambil data (10 per halaman) dan sertakan parameter pencarian agar paginasi tidak rusak
@@ -85,7 +84,7 @@ class AdminController extends Controller
     {
         $movie = Movie::findOrFail($id);
         
-        // Menghapus film (Jika database-mu sudah disetting cascade, data di tabel streams otomatis ikut terhapus)
+        // Menghapus film 
         $movie->delete();
 
         return redirect()->route('admin.movies.index')->with('success', 'Film berhasil dihapus dari database!');
@@ -108,7 +107,7 @@ class AdminController extends Controller
             'stream_url' => 'nullable|url',
         ]);
 
-        // KUNCI PERBAIKAN: Ambil nilai stream_url lalu hapus dari array $validated
+        // Ambil nilai stream_url lalu hapus dari array $validated
         $streamUrl = $validated['stream_url'] ?? null;
         unset($validated['stream_url']); 
 

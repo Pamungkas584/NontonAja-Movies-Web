@@ -36,7 +36,6 @@ class MovieController extends Controller
         $latestMovies = Movie::orderBy('year', 'desc')->take(10)->get();
 
         // Semua Film (Menggunakan pagination agar rapi)
-        // Jika ada filter kategori selain 'Semua', 'Populer', 'Terbaru', maka saring datanya
         $query = Movie::query();
         if (!in_array($activeCategory, ['Semua', 'Populer', 'Terbaru'])) {
             $query->where('category', 'like', "%{$activeCategory}%");
@@ -57,7 +56,7 @@ class MovieController extends Controller
         // Query dasar pencarian film
         $query = Movie::query();
 
-        // Siapkan deskripsi dinamis agar tampilan lebih hidup
+        // deskripsi dinamis agar tampilan lebih hidup
         $descriptions = [
             'action' => 'Temukan film-film penuh aksi dan adrenalin yang menegangkan dari berbagai negara. Kejar-kejaran, pertarungan epik, dan misi berbahaya menantimu.',
             'drama' => 'Selami kisah-kisah penuh emosi dan intrik yang menyentuh hati. Jelajahi berbagai sisi kehidupan manusia melalui film drama terbaik.',
@@ -96,20 +95,19 @@ class MovieController extends Controller
         return view('movies.watch', compact('movie'));
     }
 
-    // 1. Fungsi AJAX untuk mencari di Database Lokal
+    // Fungsi AJAX untuk mencari di Database Lokal
     public function searchLocal(Request $request)
     {
         $query = $request->input('q');
         
         // Cari 5 film yang mirip dengan kata kunci
         $movies = Movie::where('title', 'like', "%{$query}%")
-                       ->take(5)
-                       ->get(['id', 'title', 'thumbnail_url', 'year', 'rating']); // Ambil kolom yang penting saja agar ringan
-                       
+                    ->take(5)
+                    ->get(['id', 'title', 'thumbnail_url', 'year', 'rating']); // Ambil kolom yang penting saja agar ringan
         return response()->json($movies);
     }
 
-    // 2. Fungsi saat tombol Enter ditekan (Mencari ke TMDB)
+    // Fungsi saat tombol Enter ditekan (Mencari ke TMDB)
     public function searchTmdb(Request $request)
     {
         $query = $request->input('q');

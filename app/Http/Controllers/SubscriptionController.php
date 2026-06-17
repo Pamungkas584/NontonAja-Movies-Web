@@ -21,7 +21,7 @@ class SubscriptionController extends Controller
         Config::$is3ds = true;
     }
 
-    // 1. Fungsi menampilkan halaman Ringkasan (Checkout)
+    // Fungsi menampilkan halaman Ringkasan (Checkout)
     public function checkoutPage($package)
     {
         $packages = [
@@ -39,7 +39,7 @@ class SubscriptionController extends Controller
         return view('subscribe.checkout', compact('selectedPackage'));
     }
 
-    // 2. Fungsi memproses data ke Midtrans (Ganti nama fungsi dari 'checkout' menjadi 'processPayment')
+    // Fungsi memproses data ke Midtrans (Ganti nama fungsi dari 'checkout' menjadi 'processPayment')
     public function processPayment(Request $request)
     {
         $request->validate([
@@ -89,7 +89,7 @@ class SubscriptionController extends Controller
         }
     }
 
-    // 3. Fungsi untuk menerima laporan dari Midtrans (Webhook)
+    // Fungsi untuk menerima laporan dari Midtrans (Webhook)
     public function notificationHandler(Request $request)
     {
         $serverKey = config('services.midtrans.server_key');

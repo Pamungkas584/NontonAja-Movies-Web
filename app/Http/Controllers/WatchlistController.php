@@ -29,7 +29,7 @@ class WatchlistController extends Controller
     // Menampilkan semua film yang ada di watchlist user
     public function index()
     {
-        /** @var \App\Models\User $user */
+        
         $user = Auth::user();
 
         // Mengambil daftar film yang ditambahkan oleh user dengan sistem pagination (misal 18 film per halaman)
