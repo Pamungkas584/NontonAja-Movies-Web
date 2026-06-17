@@ -129,6 +129,7 @@ class SubscriptionController extends Controller
                 $user->update([
                     'vip_until' => $baseDate->addDays($days)
                 ]);
+                $user->syncRoles(['vip_user']); // memberi role vip ke user
             }
 
         } elseif (in_array($status, ['deny', 'cancel', 'expire'])) {
