@@ -50,9 +50,8 @@
                     <img src="{{ Auth::user()->avatar_url ?? 'https://ui-avatars.com/api/?name=Admin' }}" class="w-8 h-8 rounded-full">
                     <div class="hidden md:block text-left">
                         <p class="text-sm font-bold leading-tight">{{ Auth::user()->name }}</p>
-                        <p class="text-xs text-gray-500">Super Admin</p>
+                        <p class="text-xs text-gray-500">Admin</p>
                     </div>
-                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </div>
             </div>
         </header>

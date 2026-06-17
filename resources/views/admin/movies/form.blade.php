@@ -57,7 +57,7 @@
                     <img src="{{ Auth::user()->avatar_url ?? 'https://ui-avatars.com/api/?name=Admin' }}" class="w-8 h-8 rounded-full">
                     <div class="hidden md:block text-left">
                         <p class="text-sm font-bold leading-tight">{{ Auth::user()->name }}</p>
-                        <p class="text-xs text-gray-500">Super Admin</p>
+                        <p class="text-xs text-gray-500">Admin</p>
                     </div>
                 </div>
             </div>

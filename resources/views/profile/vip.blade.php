@@ -150,11 +150,9 @@
                     </li>
                 </ul>
 
-                <button class="w-full bg-transparent border border-gray-600 hover:border-gray-400 hover:text-white text-gray-300 font-semibold py-3.5 rounded-xl transition duration-200">
                     <a href="{{ route('subscribe.checkout.page', '3_bulan') }}" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3.5 rounded-xl transition duration-200 text-center block">
                         Berlangganan
                     </a>
-                </button>
             </div>
 
             <div class="bg-[#16181f] border border-gray-800 rounded-2xl p-8 flex flex-col hover:border-gray-600 transition duration-300">
@@ -183,11 +181,10 @@
                     </li>
                 </ul>
 
-                <button class="w-full bg-transparent border border-gray-600 hover:border-gray-400 hover:text-white text-gray-300 font-semibold py-3.5 rounded-xl transition duration-200">
-                    <a href="{{ route('subscribe.checkout.page', '1_tahun') }}" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3.5 rounded-xl transition duration-200 text-center block">
-                        Berlangganan
-                    </a>
-                </button>
+                <a href="{{ route('subscribe.checkout.page', '1_tahun') }}" class="w-full block text-center bg-transparent border border-gray-600 hover:border-gray-400 hover:text-white text-gray-300 hover:bg-gray-800 font-semibold py-3.5 rounded-xl transition duration-200">
+                    Berlangganan
+                </a>
+                
             </div>
         </div>
 
