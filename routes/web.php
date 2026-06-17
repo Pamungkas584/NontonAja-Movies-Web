@@ -34,7 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/watchlist/toggle/{movie}', [WatchlistController::class, 'toggle'])->name('watchlist.toggle');
     Route::get('/daftar-saya', [WatchlistController::class, 'index'])->name('watchlist.index');
     Route::get('/nonton/{id}', [App\Http\Controllers\MovieController::class, 'watch'])->name('movies.watch');
-    // Menampilkan Halaman Checkout
     Route::get('/subscribe/checkout/{package}', [App\Http\Controllers\SubscriptionController::class, 'checkoutPage'])->name('subscribe.checkout.page');
     Route::post('/subscribe/process', [App\Http\Controllers\SubscriptionController::class, 'processPayment'])->name('subscribe.process');
 });

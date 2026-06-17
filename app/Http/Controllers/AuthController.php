@@ -71,5 +71,3 @@ class AuthController extends Controller
         return redirect('/');
     }
 }
-
-$googleUser = Socialite::driver('google')->user();

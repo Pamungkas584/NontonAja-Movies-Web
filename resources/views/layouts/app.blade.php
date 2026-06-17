@@ -59,10 +59,10 @@
             <div class="relative">
                 @auth
                     <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
-                        <img src="{{ Auth::user()->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->username) . '&background=random' }}" 
+                        <img src="{{ Auth::user()?->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()?->username ?? 'user') . '&background=random' }}" 
                             alt="Profile" 
-                            class="w-8 h-8 rounded-full object-cover transition duration-300 {{ Auth::user()->hasRole('vip_user') ? 'border-2 border-[#ffd700] shadow-[0_0_10px_rgba(255,215,0,0.6)] animate-pulse-slow' : 'border border-gray-600' }}">
-                        <span class="text-sm font-medium hidden md:block">{{ Auth::user()->name }} ▾</span>
+                            class="w-8 h-8 rounded-full object-cover transition duration-300 {{ Auth::user()?->hasRole('vip_user') ? 'border-2 border-[#ffd700] shadow-[0_0_10px_rgba(255,215,0,0.6)] animate-pulse-slow' : 'border border-gray-600' }}">
+                        <span class="text-sm font-medium hidden md:block">{{ Auth::user()?->name }} ▾</span>
                     </button>
                     
                     <div id=    "dropdownMenu" class="hidden absolute right-0 mt-3 w-48 bg-[#181a20] rounded-md shadow-lg border border-gray-800 overflow-hidden z-50">
@@ -140,14 +140,3 @@
     <script src="{{ asset('script/app_script.js') }}?v={{ time() }}"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-<button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
-    <img src="{{ Auth::user()->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->username) . '&background=random' }}" alt="Profile" class="w-8 h-8 rounded-full border border-gray-600 object-cover">
-    <span class="text-sm font-medium hidden md:block">{{ Auth::user()->name }} ▾</span>
-</button>
