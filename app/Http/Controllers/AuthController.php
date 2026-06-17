@@ -29,9 +29,8 @@ class AuthController extends Controller
     {
         try {
             // Ambil data user dari Google
-            $googleUser = Socialite::driver('google')->user();
-
-            // Membuat username otomatis dari nama (misal: "John Doe" -> "johndoe")
+            $googleUser = Socialite::driver('google')->stateless()->user();
+            // Membuat username otomatis dari nama yang ada di gogle
             // Jika akun Google kebetulan punya nickname, pakai itu. Jika tidak, ambil dari nama asli.
             $generatedUsername = $googleUser->getNickname() ?? Str::slug($googleUser->getName(), '');
 
@@ -55,7 +54,7 @@ class AuthController extends Controller
             return redirect('/');
 
         } catch (\Exception $e) {
-            // Jika user batal login atau terjadi error
+            // tampilkan eror
             dd($e);
             // return redirect('/login')->with('error', 'Gagal login menggunakan Google. Silakan coba lagi.');
         }
@@ -72,3 +71,5 @@ class AuthController extends Controller
         return redirect('/');
     }
 }
+
+$googleUser = Socialite::driver('google')->user();
